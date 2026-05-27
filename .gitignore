@@ -1,0 +1,91 @@
+# Xcode
+.DS_Store
+*.swp
+*.lock
+*.xcuserstate
+*.xccheckout
+*.moved-aside
+*.xcscmblueprint
+
+# Xcode user data
+xcuserdata/
+*.xcuserdatad/
+*.xcworkspace/xcuserdata/
+
+# Build products
+build/
+Build/
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+.swiftpm/
+# Package.resolved
+
+# CocoaPods
+Pods/
+*.xcworkspace
+
+# Carthage
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+
+# AppCode / JetBrains
+.idea/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+*.log
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Local config
+Config/Secrets.xcconfig
+*.local.xcconfig
+
+# Generated files
+Generated/
+*.generated.swift
+
+# Core Data
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Test results
+TestResults/
+*.xcresult
+
+# SwiftLint
+.swiftlint.result.json
+
+# Tuist, if you ever use it
+Tuist/Dependencies/
+Tuist/.build/
+
+# Bundler
+.bundle/
+vendor/bundle/
+
+# Archives
+*.zip
+*.tar.gz
