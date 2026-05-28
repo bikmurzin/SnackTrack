@@ -13,7 +13,7 @@ final class AppCoordinator {
     }
     
     func start() -> UIViewController {
-        let startViewController = ViewController()
+        let startViewController = DiaryViewController()
         navigationController.setViewControllers([startViewController], animated: true)
         return navigationController
     }
