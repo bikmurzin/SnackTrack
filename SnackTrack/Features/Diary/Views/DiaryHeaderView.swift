@@ -10,7 +10,7 @@ import UIKit
 
 extension DiaryHeaderView {
     private struct Appearance {
-        static let verticalOffset = 12.0
+        static let verticalOffset = 4.0
         static let dateLabelTopOffset = 4.0
         static let horizontalOffsetBetweenElements = 12.0
 

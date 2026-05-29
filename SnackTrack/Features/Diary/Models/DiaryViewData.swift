@@ -9,13 +9,15 @@ struct DiaryViewData {
     let headerModel: DiaryHeaderData
     let calorieSummary: CalorieSummaryData
     let macrosSummary: MacrosSummaryData
+    let mealsSummary: MealsSummaryData
 }
 
 extension DiaryViewData {
     static let mock = DiaryViewData(
         headerModel: DiaryHeaderData.mock,
         calorieSummary: CalorieSummaryData.mock,
-        macrosSummary: MacrosSummaryData.mock
+        macrosSummary: MacrosSummaryData.mock,
+        mealsSummary: MealsSummaryData.mock
     )
 }
 

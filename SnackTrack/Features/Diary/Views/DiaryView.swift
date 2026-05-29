@@ -21,6 +21,7 @@ final class DiaryView: UIView {
     private let headerView = DiaryHeaderView()
     private let calorieSummaryView = CalorieSummaryView()
     private let macrosSummaryView = MacrosSummaryView()
+    private let mealsSummaryView = MealsSummaryView()
     
     init() {
         super.init(frame: .zero)
@@ -37,6 +38,7 @@ final class DiaryView: UIView {
         headerView.configure(with: viewData.headerModel)
         calorieSummaryView.configure(with: viewData.calorieSummary)
         macrosSummaryView.configure(with: viewData.macrosSummary)
+        mealsSummaryView.configure(with: viewData.mealsSummary)
     }
     
     private func setupAppearance() {
@@ -56,6 +58,7 @@ final class DiaryView: UIView {
         stackView.addArrangedSubview(headerView)
         stackView.addArrangedSubview(calorieSummaryView)
         stackView.addArrangedSubview(macrosSummaryView)
+        stackView.addArrangedSubview(mealsSummaryView)
     }
     
     private func makeConstraints() {
