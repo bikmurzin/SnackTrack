@@ -7,6 +7,7 @@
 
 struct DiaryViewData {
     let headerModel: DiaryHeaderData
+    let calorieSummary: CalorieSummaryData
 }
 
 #if DEBUG
@@ -15,7 +16,8 @@ extension DiaryViewData {
         headerModel: DiaryHeaderData(
             dayName: "Сегодня",
             date: "27 мая, среда"
-        )
+        ),
+        calorieSummary: CalorieSummaryData(remainingCalories: 1240, goalCalories: 2200, consumedCalories: 960, progress: 0.44)
     )
 }
 #endif

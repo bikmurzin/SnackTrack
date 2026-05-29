@@ -11,6 +11,7 @@ import SnapKit
 extension DiaryView {
     private struct Appearance {
         static let stackViewSpacing = 16.0
+        static let horizontalOffset = 16.0
     }
 }
 
@@ -18,6 +19,7 @@ final class DiaryView: UIView {
     private let scrollView = UIScrollView()
     private let stackView = UIStackView()
     private let headerView = DiaryHeaderView()
+    private let calorieSummaryView = CalorieSummaryView()
     
     init() {
         super.init(frame: .zero)
@@ -31,15 +33,15 @@ final class DiaryView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with viewModel: DiaryViewData) {
-        headerView.configure(with: viewModel.headerModel)
+    func configure(with viewData: DiaryViewData) {
+        headerView.configure(with: viewData.headerModel)
+        calorieSummaryView.configure(with: viewData.calorieSummary)
     }
     
     private func setupAppearance() {
         stackView.axis = .vertical
         stackView.spacing = Appearance.stackViewSpacing
         stackView.alignment = .fill
-        stackView.distribution = .fill
         
         scrollView.showsVerticalScrollIndicator = false
         scrollView.alwaysBounceVertical = true
@@ -49,15 +51,19 @@ final class DiaryView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(stackView)
         stackView.addArrangedSubview(headerView)
+        stackView.addArrangedSubview(calorieSummaryView)
     }
     
     private func makeConstraints() {
         stackView.snp.makeConstraints { make in
-            make.edges.equalTo(scrollView.contentLayoutGuide)
+            make.top.bottom.equalTo(scrollView.contentLayoutGuide)
+            make.leading.trailing.equalTo(scrollView.contentLayoutGuide)
+                .inset(Appearance.horizontalOffset)
             make.width.equalTo(scrollView.frameLayoutGuide)
+                .offset(-Appearance.horizontalOffset * 2)
         }
         scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.horizontalEdges.verticalEdges.equalToSuperview()
         }
     }
 }
