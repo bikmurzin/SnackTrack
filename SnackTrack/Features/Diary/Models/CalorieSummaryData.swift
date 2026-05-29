@@ -11,3 +11,7 @@ struct CalorieSummaryData {
     let consumedCalories: Int
     let progress: Double
 }
+
+extension CalorieSummaryData {
+    static let mock = CalorieSummaryData(remainingCalories: 1240, goalCalories: 2200, consumedCalories: 960, progress: 0.44)
+}

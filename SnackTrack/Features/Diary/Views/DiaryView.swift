@@ -20,13 +20,13 @@ final class DiaryView: UIView {
     private let stackView = UIStackView()
     private let headerView = DiaryHeaderView()
     private let calorieSummaryView = CalorieSummaryView()
+    private let macrosSummaryView = MacrosSummaryView()
     
     init() {
         super.init(frame: .zero)
+        setupAppearance()
         addSubviews()
         makeConstraints()
-        setupAppearance()
-        backgroundColor = .systemBackground
     }
     
     required init?(coder: NSCoder) {
@@ -36,9 +36,12 @@ final class DiaryView: UIView {
     func configure(with viewData: DiaryViewData) {
         headerView.configure(with: viewData.headerModel)
         calorieSummaryView.configure(with: viewData.calorieSummary)
+        macrosSummaryView.configure(with: viewData.macrosSummary)
     }
     
     private func setupAppearance() {
+        backgroundColor = .systemBackground
+        
         stackView.axis = .vertical
         stackView.spacing = Appearance.stackViewSpacing
         stackView.alignment = .fill
@@ -52,6 +55,7 @@ final class DiaryView: UIView {
         scrollView.addSubview(stackView)
         stackView.addArrangedSubview(headerView)
         stackView.addArrangedSubview(calorieSummaryView)
+        stackView.addArrangedSubview(macrosSummaryView)
     }
     
     private func makeConstraints() {

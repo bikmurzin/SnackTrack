@@ -9,3 +9,7 @@ struct DiaryHeaderData {
     let dayName: String
     let date: String
 }
+
+extension DiaryHeaderData {
+    static let mock = DiaryHeaderData(dayName: "Сегодня", date: "29 мая, пятница")
+}

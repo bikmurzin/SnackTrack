@@ -15,6 +15,6 @@ final class DiaryViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        diaryView.configure(with: DiaryViewData(headerModel: DiaryHeaderData(dayName: "Сегодня", date: "27 мая, среда"), calorieSummary: CalorieSummaryData(remainingCalories: 1240, goalCalories: 2200, consumedCalories: 960, progress: 0.44)))
+        diaryView.configure(with: DiaryViewData.mock)
     }
 }

@@ -8,16 +8,14 @@
 struct DiaryViewData {
     let headerModel: DiaryHeaderData
     let calorieSummary: CalorieSummaryData
+    let macrosSummary: MacrosSummaryData
 }
 
-#if DEBUG
 extension DiaryViewData {
     static let mock = DiaryViewData(
-        headerModel: DiaryHeaderData(
-            dayName: "Сегодня",
-            date: "27 мая, среда"
-        ),
-        calorieSummary: CalorieSummaryData(remainingCalories: 1240, goalCalories: 2200, consumedCalories: 960, progress: 0.44)
+        headerModel: DiaryHeaderData.mock,
+        calorieSummary: CalorieSummaryData.mock,
+        macrosSummary: MacrosSummaryData.mock
     )
 }
-#endif
+
