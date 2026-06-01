@@ -5,4 +5,7 @@
 //  Created by Роберт Бикмурзин on 27.05.2026.
 //
 
-import Foundation
+enum DiaryViewState {
+    case loading
+    case content(DiaryViewData)
+}

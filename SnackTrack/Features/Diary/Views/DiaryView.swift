@@ -16,6 +16,10 @@ extension DiaryView {
 }
 
 final class DiaryView: UIView {
+    var onAddMealTap: ((MealRowData) -> Void)?
+    var onEditTap: (() -> Void)?
+    var onMealTap: ((MealRowData) -> Void)?
+    
     private let scrollView = UIScrollView()
     private let stackView = UIStackView()
     private let headerView = DiaryHeaderView()
@@ -28,6 +32,7 @@ final class DiaryView: UIView {
         setupAppearance()
         addSubviews()
         makeConstraints()
+        setupActions()
     }
     
     required init?(coder: NSCoder) {
@@ -50,6 +55,18 @@ final class DiaryView: UIView {
         
         scrollView.showsVerticalScrollIndicator = false
         scrollView.alwaysBounceVertical = true
+    }
+    
+    private func setupActions() {
+        mealsSummaryView.onEditTap = { [weak self] in
+            self?.onEditTap?()
+        }
+        mealsSummaryView.onMealTap = { [weak self] data in
+            self?.onMealTap?(data)
+        }
+        mealsSummaryView.onAddMealTap = { [weak self] data in
+            self?.onAddMealTap?(data)
+        }
     }
     
     private func addSubviews() {

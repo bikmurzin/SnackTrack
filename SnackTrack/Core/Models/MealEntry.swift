@@ -1,0 +1,29 @@
+//
+//  MealEntry.swift
+//  SnackTrack
+//
+//  Created by Роберт Бикмурзин on 30.05.2026.
+//
+
+import Foundation
+
+struct MealEntry: Identifiable, Equatable {
+    let id: UUID
+    let mealCategoryId: UUID
+    let product: FoodProduct
+    let weight: Double
+    let date: Date
+    
+    init(id: UUID = UUID(), mealCategoryId: UUID, product: FoodProduct, weight: Double, date: Date) {
+        self.id = id
+        self.mealCategoryId = mealCategoryId
+        self.product = product
+        self.weight = weight
+        self.date = date
+    }
+    
+    var nutrition: NutritionValue {
+        let ratio = weight / 100
+        return product.nutritionPer100g * ratio
+    }
+}

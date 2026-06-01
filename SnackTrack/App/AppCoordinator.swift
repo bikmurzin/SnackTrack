@@ -6,15 +6,13 @@
 import UIKit
 
 final class AppCoordinator {
-    private let navigationController: UINavigationController
-    
-    init() {
-        self.navigationController = UINavigationController()
-    }
+    private let navigationController = UINavigationController()
+    private let diaryStorage: DiaryStorageProtocol = InMemoryDiaryStorage()
     
     func start() -> UIViewController {
-        let startViewController = DiaryViewController()
-        navigationController.setViewControllers([startViewController], animated: true)
+        let viewModel = DiaryViewModel(storage: diaryStorage)
+        let startViewController = DiaryViewController(viewModel: viewModel)
+        navigationController.setViewControllers([startViewController], animated: false)
         return navigationController
     }
 }
