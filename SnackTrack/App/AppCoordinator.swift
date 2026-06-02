@@ -11,7 +11,8 @@ final class AppCoordinator {
     
     func start() -> UIViewController {
         let viewModel = DiaryViewModel(storage: diaryStorage)
-        let startViewController = DiaryViewController(viewModel: viewModel)
+//        let startViewController = DiaryViewController(viewModel: viewModel)
+        let startViewController = AddProductViewController()
         navigationController.setViewControllers([startViewController], animated: false)
         return navigationController
     }
