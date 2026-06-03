@@ -14,8 +14,12 @@ extension AddProductActionsView {
     }
 }
 
+/// View быстрых действий для добавления продукта.
 final class AddProductActionsView: UIView {
+    /// Вызывается при выборе сканирования штрих-кода.
     var onBarcodeTap: (() -> Void)?
+
+    /// Вызывается при выборе голосового ввода.
     var onVoiceInputTap: (() -> Void)?
 
     private let stackView = UIStackView()
@@ -35,6 +39,7 @@ final class AddProductActionsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Обновляет кнопки быстрых действий.
     func configure(with data: AddProductActionsData) {
         barcodeButtonView.configure(with: data.barcodeAction)
         voiceInputButtonView.configure(with: data.voiceInputAction)

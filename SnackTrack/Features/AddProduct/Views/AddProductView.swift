@@ -15,6 +15,7 @@ extension AddProductView {
     }
 }
 
+/// Корневая view экрана добавления продукта с выбором приёма пищи, поиском и недавними продуктами.
 final class AddProductView: UIView {
     private let stackView = UIStackView()
 
@@ -34,7 +35,8 @@ final class AddProductView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    /// Обновляет секции экрана подготовленными данными.
     func configure(with data: AddProductViewData) {
         mealPickerView.configure(with: data.mealOptions)
         addProductActionsView.configure(with: data.actionsData)
@@ -48,7 +50,7 @@ final class AddProductView: UIView {
         stackView.spacing = Appearance.stackViewSpacing
         stackView.alignment = .fill
     }
-    
+
     private func setupActions() {
         productSearchView.onTextChanged = { text in
             print("search text:", text)

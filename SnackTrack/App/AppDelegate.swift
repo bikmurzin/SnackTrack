@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 
 @main
+/// Главный делегат приложения, отвечающий за жизненный цикл приложения и Core Data.
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
@@ -34,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data stack
 
+    /// Контейнер Core Data, который загружает persistent store приложения.
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
@@ -46,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
+
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.
@@ -63,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data Saving support
 
+    /// Сохраняет изменения в основном Core Data context, если они есть.
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -78,4 +81,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-

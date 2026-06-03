@@ -26,11 +26,14 @@ extension CircularProgressView {
     }
 }
 
+/// Круговой индикатор прогресса с текстом в центре.
 final class CircularProgressView: UIView {
+    /// Основной текст в центре кругового индикатора.
     var centerText: String = "" {
         didSet { centerLabel.text = centerText }
     }
 
+    /// Дополнительный текст под основным значением.
     var bottomText: String = "" {
         didSet { bottomLabel.text = bottomText }
     }
@@ -54,6 +57,7 @@ final class CircularProgressView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Устанавливает прогресс в диапазоне от 0 до 1.
     func setProgress(_ progress: Double) {
         self.progress = min(
             max(progress, Appearance.minProgress),
@@ -62,6 +66,7 @@ final class CircularProgressView: UIView {
         setNeedsLayout()
     }
 
+    /// Перестраивает окружности прогресса под текущий размер view.
     override func layoutSubviews() {
         super.layoutSubviews()
 

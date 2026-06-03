@@ -7,12 +7,13 @@
 
 import Foundation
 
+/// Категория приёма пищи, например завтрак, обед или перекус.
 struct MealCategory: Identifiable, Equatable {
     let id: UUID
     var title: String
     var iconSystemName: String
     var sortOrder: Int
-    
+
     init(id: UUID = UUID(), title: String, iconSystemName: String, sortOrder: Int) {
         self.id = id
         self.title = title

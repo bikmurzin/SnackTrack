@@ -18,12 +18,13 @@ extension RecentProductsView {
     private struct Texts {
         static let title = "НЕДАВНИЕ ПРОДУКТЫ"
     }
-    
+
     private nonisolated enum RecentProductSection: Hashable, Sendable {
         case main
     }
 }
 
+/// View списка недавних продуктов на экране добавления продукта.
 final class RecentProductsView: UIView {
     private let stackView = UIStackView()
     private let titleLabel = UILabel()
@@ -44,6 +45,7 @@ final class RecentProductsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Применяет новый список недавних продуктов через diffable snapshot.
     func configure(with items: [RecentProductRowData]) {
         var snapshot = NSDiffableDataSourceSnapshot<RecentProductSection, RecentProductRowData>()
 

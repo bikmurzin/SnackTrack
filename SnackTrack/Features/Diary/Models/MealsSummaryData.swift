@@ -7,10 +7,12 @@
 
 import UIKit
 
+/// Данные для списка приёмов пищи на экране дневника.
 struct MealsSummaryData {
     let meals: [MealRowData]
 }
 
+/// Данные одной строки приёма пищи.
 struct MealRowData {
     let id: UUID
     let title: String

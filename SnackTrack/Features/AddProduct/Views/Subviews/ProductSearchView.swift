@@ -21,8 +21,12 @@ extension ProductSearchView {
     }
 }
 
+/// View поиска продукта с заголовком и текстовым полем.
 final class ProductSearchView: UIView {
+    /// Вызывается при каждом изменении текста поиска.
     var onTextChanged: ((String) -> Void)?
+
+    /// Вызывается при запуске поиска.
     var onSearchButtonTap: ((String) -> Void)?
 
     private let titleLabel = UILabel()
@@ -41,6 +45,7 @@ final class ProductSearchView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Устанавливает текст поискового поля.
     func setText(_ text: String) {
         searchTextField.text = text
     }
@@ -52,14 +57,14 @@ final class ProductSearchView: UIView {
 
     private func setupAppearance() {
         backgroundColor = .clear
-        
+
         titleLabel.text = Texts.title
         titleLabel.font = .systemFont(
             ofSize: Appearance.titleFontSize,
             weight: .semibold
         )
         titleLabel.textColor = .secondaryLabel
-        
+
         searchTextField.placeholder = Texts.placeholder
         searchTextField.backgroundColor = .secondarySystemBackground
         searchTextField.delegate = self

@@ -26,6 +26,7 @@ extension MacrosSummaryView {
     }
 }
 
+/// Карточка сводки по белкам, жирам и углеводам.
 final class MacrosSummaryView: UIView {
     private let contentStackView = UIStackView()
 
@@ -47,12 +48,14 @@ final class MacrosSummaryView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Обновляет данные всех макронутриентов.
     func configure(with data: MacrosSummaryData) {
         proteinsView.configure(with: data.proteins)
         fatsView.configure(with: data.fats)
         carbsView.configure(with: data.carbs)
     }
 
+    /// Обновляет путь тени после расчёта финальных размеров карточки.
     override func layoutSubviews() {
         super.layoutSubviews()
 

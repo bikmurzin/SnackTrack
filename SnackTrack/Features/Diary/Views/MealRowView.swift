@@ -39,8 +39,12 @@ extension MealRowView {
     }
 }
 
+/// Строка приёма пищи с иконкой, названием, калориями и кнопкой добавления.
 final class MealRowView: UIView {
+    /// Вызывается при нажатии на строку.
     var onTap: (() -> Void)?
+
+    /// Вызывается при нажатии на кнопку добавления продукта.
     var onAddTap: (() -> Void)?
 
     private let iconContainerView = UIView()
@@ -68,6 +72,7 @@ final class MealRowView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Обновляет отображение строки данными приёма пищи.
     func configure(with data: MealRowData) {
         self.data = data
 

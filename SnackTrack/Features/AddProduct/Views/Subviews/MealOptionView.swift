@@ -26,6 +26,7 @@ extension MealOptionView {
     }
 }
 
+/// Интерактивная карточка одного варианта приёма пищи.
 final class MealOptionView: UIControl {
     private let stackView = UIStackView()
     private let iconImageView = UIImageView()
@@ -43,6 +44,7 @@ final class MealOptionView: UIControl {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Обновляет название, иконку и состояние выбора карточки.
     func configure(with data: MealOptionData) {
         titleLabel.text = data.title
         titleLabel.textColor = data.isSelected ? data.tintColor : .secondaryLabel

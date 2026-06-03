@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Делегат сцены, который создаёт окно и подключает корневой контроллер.
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -17,10 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
-        
+
         let window = UIWindow(windowScene: scene)
         let controller = appCoordinator.start()
-        
+
         window.rootViewController = controller
         self.window = window
         window.makeKeyAndVisible()
@@ -59,4 +60,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-

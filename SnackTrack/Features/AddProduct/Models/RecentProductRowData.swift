@@ -7,19 +7,21 @@
 
 import Foundation
 
+/// Данные строки недавнего продукта для diffable data source.
 nonisolated struct RecentProductRowData: Hashable, Sendable {
     let id: UUID
     let productName: String
     let weightText: String
     let caloriesText: String
-    
+
+    /// Создаёт строку недавнего продукта из готовых текстовых значений.
     init (id: UUID = UUID(), productName: String, weightText: String, caloriesText: String) {
         self.id = id
         self.productName = productName
         self.weightText = weightText
         self.caloriesText = caloriesText
     }
-    
+
     @MainActor
     init(_ mealEntry: MealEntry) {
         self.id = mealEntry.id

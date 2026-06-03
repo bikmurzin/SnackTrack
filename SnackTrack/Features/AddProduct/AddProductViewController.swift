@@ -18,21 +18,22 @@ extension AddProductViewController {
     }
 }
 
+/// Контроллер экрана добавления продукта.
 final class AddProductViewController: UIViewController {
     private let addProductView = AddProductView()
-    
+
     override func loadView() {
         view = addProductView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupNavigationBar()
         addProductView.configure(with: .mock)
         addKeyboardDismissLogic()
     }
-    
+
     private func setupNavigationBar() {
         title = Constants.title
 
@@ -52,20 +53,20 @@ final class AddProductViewController: UIViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = false
     }
-    
+
     private func addKeyboardDismissLogic() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
-    
+
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
-    
+
     @objc private func closeButtonTapped() {
         dismiss(animated: true)
     }
-    
+
     @objc private func confirmButtonTapped() {
         print("confirm tapped")
     }

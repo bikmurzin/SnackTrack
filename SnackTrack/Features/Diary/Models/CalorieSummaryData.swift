@@ -5,6 +5,7 @@
 //  Created by Роберт Бикмурзин on 28.05.2026.
 //
 
+/// Данные для блока с дневной сводкой по калориям.
 struct CalorieSummaryData {
     let remainingCalories: Int
     let goalCalories: Int

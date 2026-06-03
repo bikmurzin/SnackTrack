@@ -21,7 +21,7 @@ extension MealsSummaryView {
 
         static let titleFontSize = 20.0
         static let editButtonFontSize = 17.0
-        
+
         static let titleToEditButtonMinOffset = 12.0
     }
 
@@ -31,9 +31,15 @@ extension MealsSummaryView {
     }
 }
 
+/// View списка приёмов пищи с возможностью выбора строки и добавления продукта.
 final class MealsSummaryView: UIView {
+    /// Вызывается при нажатии на кнопку редактирования.
     var onEditTap: (() -> Void)?
+
+    /// Вызывается при выборе строки приёма пищи.
     var onMealTap: ((MealRowData) -> Void)?
+
+    /// Вызывается при нажатии на добавление продукта в строке приёма пищи.
     var onAddMealTap: ((MealRowData) -> Void)?
 
     private let headerView = UIView()
@@ -57,6 +63,7 @@ final class MealsSummaryView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Перестраивает список строк приёмов пищи.
     func configure(with data: MealsSummaryData) {
         meals = data.meals
 
@@ -85,6 +92,7 @@ final class MealsSummaryView: UIView {
         }
     }
 
+    /// Обновляет путь тени карточки после расчёта финальных размеров.
     override func layoutSubviews() {
         super.layoutSubviews()
 

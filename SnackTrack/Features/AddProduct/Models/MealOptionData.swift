@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Данные варианта приёма пищи для выбора на экране добавления продукта.
 struct MealOptionData: Identifiable, Equatable {
     let id: UUID
     let title: String

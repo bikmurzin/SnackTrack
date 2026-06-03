@@ -32,7 +32,9 @@ extension MealPickerView {
     }
 }
 
+/// View выбора приёма пищи для добавляемого продукта.
 final class MealPickerView: UIView {
+    /// Вызывается при выборе варианта приёма пищи.
     var onMealTap: ((MealOptionData) -> Void)?
 
     private let titleLabel = UILabel()
@@ -53,6 +55,7 @@ final class MealPickerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Перестраивает варианты приёмов пищи.
     func configure(with options: [MealOptionData]) {
         self.options = options
 
@@ -79,6 +82,7 @@ final class MealPickerView: UIView {
         }
     }
 
+    /// Обновляет путь тени контейнера после расчёта размеров.
     override func layoutSubviews() {
         super.layoutSubviews()
 

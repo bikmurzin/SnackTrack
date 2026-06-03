@@ -23,6 +23,7 @@ extension AddProductActionButtonView {
     }
 }
 
+/// Кнопка быстрого действия с иконкой и названием.
 final class AddProductActionButtonView: UIControl {
     private let iconImageView = UIImageView()
     private let titleLabel = UILabel()
@@ -38,6 +39,7 @@ final class AddProductActionButtonView: UIControl {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Обновляет название, иконку и цвет кнопки.
     func configure(with data: AddProductActionData) {
         titleLabel.text = data.title
         iconImageView.image = UIImage(systemName: data.iconSystemName)

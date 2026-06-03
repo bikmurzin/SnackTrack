@@ -5,6 +5,7 @@
 //  Created by Роберт Бикмурзин on 02.06.2026.
 //
 
+/// Полный набор данных для отображения экрана добавления продукта.
 struct AddProductViewData {
     let mealOptions: [MealOptionData]
     let actionsData: AddProductActionsData

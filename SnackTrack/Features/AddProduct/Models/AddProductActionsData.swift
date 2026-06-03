@@ -7,11 +7,13 @@
 
 import UIKit
 
+/// Данные для блока быстрых действий на экране добавления продукта.
 struct AddProductActionsData: Equatable {
     let barcodeAction: AddProductActionData
     let voiceInputAction: AddProductActionData
 }
 
+/// Данные одной кнопки быстрого действия.
 struct AddProductActionData: Equatable {
     let title: String
     let iconSystemName: String

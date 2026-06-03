@@ -17,33 +17,35 @@ extension RecentProductCell {
     }
 }
 
+/// Ячейка таблицы для отображения недавнего продукта.
 final class RecentProductCell: UITableViewCell {
     static let reuseIdentifier: String = "RecentProductCell"
-    
+
     private let titleLabel = UILabel()
     private let weightLabel = UILabel()
     private let caloriesCountLabel = UILabel()
     private let caloriesUnitLabel = UILabel()
     private let leftStackView = UIStackView()
     private let rightStackView = UIStackView()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubviews()
         makeConstraints()
         setupAppearance()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    /// Обновляет название продукта, вес и количество калорий.
     func configure(with data: RecentProductRowData) {
         titleLabel.text = data.productName
         weightLabel.text = data.weightText
         caloriesCountLabel.text = data.caloriesText
     }
-    
+
     private func setupAppearance() {
         titleLabel.font = .preferredFont(forTextStyle: .body)
         titleLabel.adjustsFontForContentSizeCategory = true
@@ -64,14 +66,14 @@ final class RecentProductCell: UITableViewCell {
         caloriesUnitLabel.adjustsFontForContentSizeCategory = true
         caloriesUnitLabel.textColor = .secondaryLabel
         caloriesUnitLabel.text = Appearance.caloriesUnitText
-        
+
         leftStackView.axis = .vertical
         leftStackView.spacing = Appearance.leftStackViewSpacing
-        
+
         rightStackView.axis = .horizontal
         rightStackView.spacing = Appearance.rightStackViewSpacing
     }
-    
+
     private func addSubviews() {
         contentView.addSubview(leftStackView)
         contentView.addSubview(rightStackView)
@@ -80,7 +82,7 @@ final class RecentProductCell: UITableViewCell {
         rightStackView.addArrangedSubview(caloriesCountLabel)
         rightStackView.addArrangedSubview(caloriesUnitLabel)
     }
-    
+
     private func makeConstraints() {
         leftStackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
