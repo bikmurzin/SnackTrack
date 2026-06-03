@@ -19,7 +19,6 @@ extension MealPickerView {
         static let optionsSpacing = 10.0
 
         static let titleFontSize = 13.0
-        static let titleLetterSpacing = 0.7
 
         static let optionHeight = 74.0
 

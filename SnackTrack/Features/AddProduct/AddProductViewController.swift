@@ -30,6 +30,7 @@ final class AddProductViewController: UIViewController {
         
         setupNavigationBar()
         addProductView.configure(with: .mock)
+        addKeyboardDismissLogic()
     }
     
     private func setupNavigationBar() {
@@ -50,6 +51,15 @@ final class AddProductViewController: UIViewController {
         )
 
         navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    private func addKeyboardDismissLogic() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     @objc private func closeButtonTapped() {

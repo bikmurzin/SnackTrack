@@ -31,8 +31,6 @@ final class MealOptionView: UIControl {
     private let iconImageView = UIImageView()
     private let titleLabel = UILabel()
 
-    private var data: MealOptionData?
-
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -46,8 +44,6 @@ final class MealOptionView: UIControl {
     }
 
     func configure(with data: MealOptionData) {
-        self.data = data
-
         titleLabel.text = data.title
         titleLabel.textColor = data.isSelected ? data.tintColor : .secondaryLabel
 

@@ -16,16 +16,19 @@ extension AddProductView {
 }
 
 final class AddProductView: UIView {
-    private let scrollView = UIScrollView()
     private let stackView = UIStackView()
 
     private let mealPickerView = MealPickerView()
+    private let productSearchView = ProductSearchView()
+    private let addProductActionsView = AddProductActionsView()
+    private let recentProductsView = RecentProductsView()
 
     init() {
         super.init(frame: .zero)
         setupAppearance()
         addSubviews()
         makeConstraints()
+        setupActions()
     }
 
     required init?(coder: NSCoder) {
@@ -34,63 +37,41 @@ final class AddProductView: UIView {
     
     func configure(with data: AddProductViewData) {
         mealPickerView.configure(with: data.mealOptions)
+        addProductActionsView.configure(with: data.actionsData)
+        recentProductsView.configure(with: data.recentProductsData)
     }
 
     private func setupAppearance() {
         backgroundColor = .systemBackground
 
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.alwaysBounceVertical = true
-
         stackView.axis = .vertical
         stackView.spacing = Appearance.stackViewSpacing
         stackView.alignment = .fill
     }
+    
+    private func setupActions() {
+        productSearchView.onTextChanged = { text in
+            print("search text:", text)
+        }
+
+        productSearchView.onSearchButtonTap = { text in
+            print("search button tapped:", text)
+        }
+    }
 
     private func addSubviews() {
-        addSubview(scrollView)
-
-        scrollView.addSubview(stackView)
+        addSubview(stackView)
         stackView.addArrangedSubview(mealPickerView)
+        stackView.addArrangedSubview(productSearchView)
+        stackView.addArrangedSubview(addProductActionsView)
+        stackView.addArrangedSubview(recentProductsView)
     }
 
     private func makeConstraints() {
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-
         stackView.snp.makeConstraints { make in
-            make.top.bottom.equalTo(scrollView.contentLayoutGuide)
-            make.leading.trailing.equalTo(scrollView.contentLayoutGuide)
-                .inset(Appearance.horizontalOffset)
-            make.width.equalTo(scrollView.frameLayoutGuide)
-                .offset(-Appearance.horizontalOffset * 2)
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(Appearance.horizontalOffset)
+            make.bottom.equalTo(safeAreaLayoutGuide)
         }
     }
-    
-#if DEBUG
-func configureMock() {
-    mealPickerView.configure(with: MealOptionData.mockItems)
 }
-
-#endif
-}
-
-#if DEBUG
-import SwiftUI
-
-private struct AddProductViewPreview: UIViewRepresentable {
-    func makeUIView(context: Context) -> AddProductView {
-        let view = AddProductView()
-        view.configureMock()
-        return view
-    }
-
-    func updateUIView(_ uiView: AddProductView, context: Context) {}
-}
-
-#Preview {
-    AddProductViewPreview()
-        .ignoresSafeArea()
-}
-#endif
