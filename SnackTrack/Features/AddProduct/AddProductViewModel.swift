@@ -9,8 +9,14 @@ import Combine
 import Foundation
 
 /// ViewModel экрана добавления продукта, которая готовит состояние для UI.
+@MainActor
 final class AddProductViewModel {
+    var closeScreenRequested: (() -> Void)?
+    
     @Published private(set) var state: AddProductViewState = .loading
+    private let inputSubject: CurrentValueSubject<AddProductInput, Never>
+    
+    private let currentDate: Date
 
     private let storage: DiaryStorageProtocol
     private var isLoaded = false
@@ -18,46 +24,65 @@ final class AddProductViewModel {
 
     init(
         storage: DiaryStorageProtocol,
-        calculationService: DiaryCalculationService = DiaryCalculationService(),
-        mapper: DiaryViewDataMapper = DiaryViewDataMapper()
+        currentDate: Date,
+        mealCategoryId: UUID
     ) {
         self.storage = storage
-        self.calculationService = calculationService
-        self.mapper = mapper
+        self.currentDate = currentDate
+        inputSubject = .init(AddProductInput(selectedMealCategoryId: mealCategoryId))
+        
     }
 
     /// Запускает первичную загрузку данных для экрана.
     func viewDidLoad() {
         guard !isLoaded else { return }
-
+        
         isLoaded = true
-        storage.observeDiary(for: Date())
-            .map { [calculationService, mapper] diary in
-                mapper.map(
-                    diary: diary,
-                    calculationService: calculationService
+        
+        Publishers.CombineLatest(
+            storage.observeDiaryData(),
+            inputSubject
+        )
+        .map(makeViewData)
+        .map(AddProductViewState.content)
+        .sink { [weak self] state in
+            self?.state = state
+        }
+        .store(in: &cancellables)
+    }
+    
+    /// Обновляет выбранную категорию приёма пищи.
+    func selectMealCategory(with id: UUID) {
+        inputSubject.send(AddProductInput(selectedMealCategoryId: id))
+    }
+    
+    private func makeViewData(
+        data: DiaryData,
+        input: AddProductInput
+    ) -> AddProductViewData {
+        let recentProducts = data.mealEntries
+            .reversed()
+            .prefix(10)
+            .map(RecentProductRowData.init)
+        
+        let mealOptions: [MealOptionData] = data.mealCategories
+            .map { category in
+                MealOptionData(
+                    id: category.id,
+                    title: category.title,
+                    iconSystemName: category.iconSystemName,
+                    isSelected: category.id == input.selectedMealCategoryId
                 )
             }
-            .map { DiaryViewState.content($0) }
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] state in
-                self?.state = state
-            }
-            .store(in: &cancellables)
+            
+        
+        return AddProductViewData(
+            mealOptions: mealOptions,
+            recentProductsData: recentProducts
+        )
     }
 
-    /// Обрабатывает нажатие на добавление продукта в выбранный приём пищи.
-    func onAddMealTap(_ data: MealRowData) {
-        // TODO: Открыть экран добавления продукта
-    }
-
-    /// Обрабатывает нажатие на редактирование списка добавленных продуктов.
-    func onEditTap() {
-        // TODO: Открыть экран с общей сводкой по добавленным продуктам за день
-    }
-
-    /// Обрабатывает выбор приёма пищи.
-    func onMealTap(_ data: MealRowData) {
-        // TODO: Открыть экран со сводкой по таппнутому приему пищи
+    func onCloseButtonTap() {
+        closeScreenRequested?()
     }
 }

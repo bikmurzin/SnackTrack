@@ -9,24 +9,31 @@ import Combine
 import Foundation
 
 /// ViewModel экрана дневника, которая загружает записи и формирует состояние UI.
+@MainActor
 final class DiaryViewModel {
+    /// Вызывается, когда требуется открыть экран добавления продукта для выбранной даты и приёма пищи.
+    var onAddProductRequested: ((_ currentDate: Date, _ mealCategoryId: UUID) -> Void)?
+    
     @Published private(set) var state: DiaryViewState = .loading
 
     private let storage: DiaryStorageProtocol
     private let calculationService: DiaryCalculationService
     private let mapper: DiaryViewDataMapper
     private var isLoaded = false
+    private var currentDate: Date
 
     private var cancellables = Set<AnyCancellable>()
 
     init(
         storage: DiaryStorageProtocol,
         calculationService: DiaryCalculationService = DiaryCalculationService(),
-        mapper: DiaryViewDataMapper = DiaryViewDataMapper()
+        mapper: DiaryViewDataMapper = DiaryViewDataMapper(),
+        currentDate: Date
     ) {
         self.storage = storage
         self.calculationService = calculationService
         self.mapper = mapper
+        self.currentDate = currentDate
     }
 
     /// Запускает первичную подписку на дневник питания.
@@ -34,7 +41,7 @@ final class DiaryViewModel {
         guard !isLoaded else { return }
 
         isLoaded = true
-        storage.observeDiary(for: Date())
+        storage.observeDiary(for: currentDate)
             .map { [calculationService, mapper] diary in
                 mapper.map(
                     diary: diary,
@@ -51,7 +58,7 @@ final class DiaryViewModel {
 
     /// Обрабатывает нажатие на добавление продукта в выбранный приём пищи.
     func onAddMealTap(_ data: MealRowData) {
-        // TODO: Открыть экран добавления продукта
+        onAddProductRequested?(currentDate, data.id)
     }
 
     /// Обрабатывает нажатие на редактирование дневной сводки.

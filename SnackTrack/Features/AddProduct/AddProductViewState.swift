@@ -11,5 +11,5 @@ enum AddProductViewState {
     case loading
 
     /// Экран готов к отображению содержимого.
-    case content
+    case content(AddProductViewData)
 }

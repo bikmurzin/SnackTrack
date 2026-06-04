@@ -39,7 +39,10 @@ final class AddProductView: UIView {
     /// Обновляет секции экрана подготовленными данными.
     func configure(with data: AddProductViewData) {
         mealPickerView.configure(with: data.mealOptions)
-        addProductActionsView.configure(with: data.actionsData)
+        
+        // TODO: Вынести данные для кнопок штрихкода и голосового ввода из моков
+        addProductActionsView.configure(with: AddProductActionsData.mock)
+        
         recentProductsView.configure(with: data.recentProductsData)
     }
 

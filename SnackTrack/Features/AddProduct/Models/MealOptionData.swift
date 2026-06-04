@@ -7,6 +7,13 @@
 
 import UIKit
 
+extension MealOptionData {
+    private struct Constants {
+        static let choosenCategoryColor: UIColor = .systemOrange
+        static let usualCategoryColor: UIColor = .secondaryLabel
+    }
+}
+
 /// Данные варианта приёма пищи для выбора на экране добавления продукта.
 struct MealOptionData: Identifiable, Equatable {
     let id: UUID
@@ -14,6 +21,14 @@ struct MealOptionData: Identifiable, Equatable {
     let iconSystemName: String
     let tintColor: UIColor
     let isSelected: Bool
+    
+    init(id: UUID, title: String, iconSystemName: String, isSelected: Bool) {
+        self.id = id
+        self.title = title
+        self.iconSystemName = iconSystemName
+        self.isSelected = isSelected
+        tintColor = isSelected ? Constants.choosenCategoryColor : Constants.usualCategoryColor
+    }
 }
 
 #if DEBUG
@@ -23,35 +38,30 @@ extension MealOptionData {
             id: UUID(),
             title: "Завтрак",
             iconSystemName: "sunrise.fill",
-            tintColor: .systemOrange,
             isSelected: true
         ),
         MealOptionData(
             id: UUID(),
             title: "Обед",
             iconSystemName: "sun.max.fill",
-            tintColor: .secondaryLabel,
             isSelected: false
         ),
         MealOptionData(
             id: UUID(),
             title: "Ужин",
             iconSystemName: "moon.fill",
-            tintColor: .secondaryLabel,
             isSelected: false
         ),
         MealOptionData(
             id: UUID(),
             title: "Перекус",
             iconSystemName: "takeoutbag.and.cup.and.straw.fill",
-            tintColor: .secondaryLabel,
             isSelected: false
         ),
         MealOptionData(
             id: UUID(),
             title: "Другое",
             iconSystemName: "ellipsis",
-            tintColor: .secondaryLabel,
             isSelected: false
         )
     ]

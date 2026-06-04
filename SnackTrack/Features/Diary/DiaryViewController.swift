@@ -37,7 +37,6 @@ final class DiaryViewController: UIViewController {
 
     private func bindViewModel() {
         viewModel.$state
-            .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
                 self?.render(state)
             }

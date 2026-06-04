@@ -35,6 +35,17 @@ final class InMemoryDiaryStorage: DiaryStorageProtocol {
             }
             .eraseToAnyPublisher()
     }
+    
+    func observeDiaryData() -> AnyPublisher<DiaryData, Never> {
+       mealEntriesSubject
+            .map { [mealCategories] entries in
+                return DiaryData(
+                    mealCategories: mealCategories.sorted { $0.sortOrder < $1.sortOrder },
+                    mealEntries: entries
+                )
+            }
+            .eraseToAnyPublisher()
+    }
 
     func addMealEntry(_ entry: MealEntry) {
         var entries = mealEntriesSubject.value

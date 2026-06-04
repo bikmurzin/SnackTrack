@@ -8,7 +8,6 @@
 /// Полный набор данных для отображения экрана добавления продукта.
 struct AddProductViewData {
     let mealOptions: [MealOptionData]
-    let actionsData: AddProductActionsData
     let recentProductsData: [RecentProductRowData]
 }
 
@@ -16,7 +15,6 @@ struct AddProductViewData {
 extension AddProductViewData {
     static let mock = AddProductViewData(
         mealOptions: MealOptionData.mockItems,
-        actionsData: AddProductActionsData.mock,
         recentProductsData: RecentProductRowData.mock
     )
 }

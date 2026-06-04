@@ -12,6 +12,9 @@ import Foundation
 protocol DiaryStorageProtocol {
     /// Возвращает поток дневника питания для указанной даты.
     func observeDiary(for date: Date) -> AnyPublisher<DailyDiary, Never>
+    
+    /// Возвращает поток общих данных дневника без фильтрации по дате.
+    func observeDiaryData() -> AnyPublisher<DiaryData, Never>
 
     /// Добавляет новую запись о продукте в дневник.
     func addMealEntry( _ entry: MealEntry)
