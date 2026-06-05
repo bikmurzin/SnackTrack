@@ -53,6 +53,7 @@ extension CalorieSummaryView {
     }
 }
 
+/// Карточка дневной сводки калорий с круговым прогрессом.
 final class CalorieSummaryView: UIView {
     private let titleLabel = UILabel()
     private let caloriesStackView = UIStackView()
@@ -75,6 +76,7 @@ final class CalorieSummaryView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Обновляет значения калорий и прогресс выполнения дневной цели.
     func configure(with data: CalorieSummaryData) {
         titleLabel.text = Texts.title
         caloriesLabel.text = data.remainingCalories.formattedWithSeparator
@@ -86,6 +88,7 @@ final class CalorieSummaryView: UIView {
         circularProgressView.bottomText = Texts.circularProgressSubtitle
     }
 
+    /// Обновляет путь тени после расчёта финальных размеров карточки.
     override func layoutSubviews() {
         super.layoutSubviews()
 

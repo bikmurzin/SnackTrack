@@ -8,6 +8,7 @@
 import Foundation
 
 extension Int {
+    /// Форматирует число с пробелами в качестве разделителей тысяч для русской локали.
     var formattedWithSeparator: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal

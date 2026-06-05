@@ -36,6 +36,7 @@ extension DiaryViewDataMapper {
     }
 }
 
+/// Маппер, который преобразует доменную модель дневника в данные для UI.
 struct DiaryViewDataMapper {
     private let calendar: Calendar
     private let locale: Locale
@@ -48,6 +49,7 @@ struct DiaryViewDataMapper {
         self.locale = locale
     }
 
+    /// Преобразует дневник питания в полный набор данных для экрана дневника.
     func map(
         diary: DailyDiary,
         calculationService: DiaryCalculationService
@@ -209,13 +211,13 @@ struct DiaryViewDataMapper {
 
         return MealsSummaryData(meals: meals)
     }
-    
+
     private func productSummary(
         for entries: [MealEntry],
         emptyText: String
     ) -> String {
         guard !entries.isEmpty else { return emptyText }
-        
+
         return entries
             .map { $0.product.name }
             .joined(separator: ", ")

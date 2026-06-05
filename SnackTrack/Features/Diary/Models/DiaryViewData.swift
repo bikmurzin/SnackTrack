@@ -5,6 +5,7 @@
 //  Created by Роберт Бикмурзин on 27.05.2026.
 //
 
+/// Полный набор данных для отображения экрана дневника питания.
 struct DiaryViewData {
     let headerModel: DiaryHeaderData
     let calorieSummary: CalorieSummaryData
@@ -20,4 +21,3 @@ extension DiaryViewData {
         mealsSummary: MealsSummaryData.mock
     )
 }
-

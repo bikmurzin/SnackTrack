@@ -7,12 +7,14 @@
 
 import UIKit
 
+/// Данные для сводки по основным макронутриентам.
 struct MacrosSummaryData {
     let proteins: MacroItemData
     let fats: MacroItemData
     let carbs: MacroItemData
 }
 
+/// Данные одной карточки макронутриента.
 struct MacroItemData {
     let title: String
     let currentValue: Int
@@ -20,6 +22,7 @@ struct MacroItemData {
     let unit: String
     let color: UIColor
 
+    /// Доля выполнения цели по макронутриенту в диапазоне от 0 до 1.
     var progress: Double {
         guard goalValue > 0 else { return 0 }
         return min(max(Double(currentValue) / Double(goalValue), 0), 1)

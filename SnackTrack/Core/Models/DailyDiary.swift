@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Дневник питания за конкретный день с доступными категориями приёмов пищи и записями.
 struct DailyDiary: Equatable {
     let date: Date
     let mealCategories: [MealCategory]

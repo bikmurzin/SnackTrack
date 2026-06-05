@@ -7,13 +7,14 @@
 
 import Foundation
 
+/// Запись о съеденном продукте в рамках конкретного приёма пищи.
 struct MealEntry: Identifiable, Equatable {
     let id: UUID
     let mealCategoryId: UUID
     let product: FoodProduct
     let weight: Double
     let date: Date
-    
+
     init(id: UUID = UUID(), mealCategoryId: UUID, product: FoodProduct, weight: Double, date: Date) {
         self.id = id
         self.mealCategoryId = mealCategoryId
@@ -21,7 +22,8 @@ struct MealEntry: Identifiable, Equatable {
         self.weight = weight
         self.date = date
     }
-    
+
+    /// Рассчитывает пищевую ценность записи с учётом указанного веса продукта.
     var nutrition: NutritionValue {
         let ratio = weight / 100
         return product.nutritionPer100g * ratio

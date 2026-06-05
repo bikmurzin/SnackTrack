@@ -30,6 +30,7 @@ extension MacroItemView {
     }
 }
 
+/// View одного макронутриента с текущим значением, целью и прогрессом.
 final class MacroItemView: UIView {
     private let stackView = UIStackView()
 
@@ -54,6 +55,7 @@ final class MacroItemView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Обновляет название, значение, единицу измерения и прогресс макронутриента.
     func configure(with data: MacroItemData) {
         titleLabel.text = data.title
         titleLabel.textColor = data.color

@@ -26,6 +26,7 @@ extension DiaryHeaderView {
     }
 }
 
+/// View заголовка дневника с названием дня, датой и кнопкой профиля.
 final class DiaryHeaderView: UIView {
     private let dayNameLabel = UILabel()
     private let dateLabel = UILabel()
@@ -42,6 +43,7 @@ final class DiaryHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Заполняет заголовок названием дня и датой.
     func configure(with data: DiaryHeaderData) {
         dayNameLabel.text = data.dayName
         dateLabel.text = data.date

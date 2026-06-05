@@ -8,24 +8,25 @@
 import Combine
 import Foundation
 
+/// Временное in-memory хранилище дневника питания с mock-данными для разработки.
 final class InMemoryDiaryStorage: DiaryStorageProtocol {
     private let calendar: Calendar
     private let mealCategories: [MealCategory]
     private let mealEntriesSubject: CurrentValueSubject<[MealEntry], Never>
-    
+
     init(calendar: Calendar = .current) {
         self.calendar = calendar
         self.mealCategories = Self.makeDefaultMealCategories()
         self.mealEntriesSubject = CurrentValueSubject(Self.makeMockEntries())
     }
-    
+
     func observeDiary(for date: Date) -> AnyPublisher<DailyDiary, Never> {
         mealEntriesSubject
             .map { [calendar, mealCategories] entries in
                 let dayEntries = entries.filter {
                     calendar.isDate($0.date, inSameDayAs: date)
                 }
-                
+
                 return DailyDiary(
                     date: date,
                     mealCategories: mealCategories.sorted { $0.sortOrder < $1.sortOrder },
@@ -35,12 +36,23 @@ final class InMemoryDiaryStorage: DiaryStorageProtocol {
             .eraseToAnyPublisher()
     }
     
+    func observeDiaryData() -> AnyPublisher<DiaryData, Never> {
+       mealEntriesSubject
+            .map { [mealCategories] entries in
+                return DiaryData(
+                    mealCategories: mealCategories.sorted { $0.sortOrder < $1.sortOrder },
+                    mealEntries: entries
+                )
+            }
+            .eraseToAnyPublisher()
+    }
+
     func addMealEntry(_ entry: MealEntry) {
         var entries = mealEntriesSubject.value
         entries.append(entry)
         mealEntriesSubject.send(entries)
     }
-    
+
     func deleteMealEntry(id: UUID) {
         let entries = mealEntriesSubject.value.filter { $0.id != id }
         mealEntriesSubject.send(entries)
@@ -52,7 +64,7 @@ extension InMemoryDiaryStorage {
     static let lunchId = UUID(uuidString: "22222222-2222-2222-2222-222222222222")!
     static let dinnerId = UUID(uuidString: "33333333-3333-3333-3333-333333333333")!
     static let snackId = UUID(uuidString: "44444444-4444-4444-4444-444444444444")!
-    
+
     private static func makeDefaultMealCategories() -> [MealCategory] {
         [
             MealCategory(
