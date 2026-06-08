@@ -28,13 +28,11 @@ extension MealOptionView {
 
 /// Интерактивная карточка одного варианта приёма пищи.
 final class MealOptionView: UIControl {
-    let id: UUID
     private let stackView = UIStackView()
     private let iconImageView = UIImageView()
     private let titleLabel = UILabel()
     
     init(option: MealOptionData) {
-        self.id = option.id
         super.init(frame: .zero)
         addSubviews()
         setupAppearance()
