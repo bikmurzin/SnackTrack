@@ -96,6 +96,7 @@ final class AddProductViewController: UIViewController {
     private func addKeyboardDismissLogic() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
+        tap.delegate = self
         view.addGestureRecognizer(tap)
     }
     
@@ -109,5 +110,21 @@ final class AddProductViewController: UIViewController {
     
     @objc private func confirmButtonTapped() {
         print("confirm tapped")
+    }
+}
+
+extension AddProductViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        var touchedView = touch.view
+        
+        while let view = touchedView {
+            if view is UIControl || view is UITextField || view is UIScrollView {
+                return false
+            }
+            
+            touchedView = view.superview
+        }
+        
+        return true
     }
 }
