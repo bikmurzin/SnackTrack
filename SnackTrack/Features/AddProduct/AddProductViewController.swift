@@ -78,7 +78,7 @@ final class AddProductViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: Images.confirm),
-            style: .prominent,
+            style: .plain,
             target: self,
             action: #selector(confirmButtonTapped)
         )
@@ -88,6 +88,7 @@ final class AddProductViewController: UIViewController {
     
     private func addKeyboardDismissLogic() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
     

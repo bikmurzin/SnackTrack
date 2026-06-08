@@ -62,6 +62,10 @@ final class AddProductView: UIView {
         productSearchView.onSearchButtonTap = { text in
             print("search button tapped:", text)
         }
+        
+        mealPickerView.onMealTap = { data in
+            
+        }
     }
 
     private func addSubviews() {
