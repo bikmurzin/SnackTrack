@@ -42,6 +42,7 @@ final class AddProductViewController: UIViewController {
         super.viewDidLoad()
         
         setupNavigationBar()
+        setupActions()
         addKeyboardDismissLogic()
         bindViewModel()
         viewModel.viewDidLoad()
@@ -84,6 +85,12 @@ final class AddProductViewController: UIViewController {
         )
         
         navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    private func setupActions() {
+        addProductView.onMealTap = { [weak self] data in
+            self?.viewModel.selectMealCategory(with: data.id)
+        }
     }
     
     private func addKeyboardDismissLogic() {

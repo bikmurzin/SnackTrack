@@ -65,8 +65,7 @@ final class MealPickerView: UIView {
         }
 
         options.forEach { option in
-            let optionView = MealOptionView()
-            optionView.configure(with: option)
+            let optionView = MealOptionView(option: option)
 
             optionView.addTarget(
                 self,
@@ -141,11 +140,9 @@ final class MealPickerView: UIView {
     }
 
     @objc private func optionTapped(_ sender: MealOptionView) {
-        guard let index = optionsStackView.arrangedSubviews.firstIndex(of: sender),
-              options.indices.contains(index) else {
+        guard let option = options.filter({ $0.id == sender.id }).first else {
             return
         }
-
-        onMealTap?(options[index])
+        onMealTap?(option)
     }
 }

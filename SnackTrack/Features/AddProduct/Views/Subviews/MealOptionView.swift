@@ -28,16 +28,18 @@ extension MealOptionView {
 
 /// Интерактивная карточка одного варианта приёма пищи.
 final class MealOptionView: UIControl {
+    let id: UUID
     private let stackView = UIStackView()
     private let iconImageView = UIImageView()
     private let titleLabel = UILabel()
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
+    
+    init(option: MealOptionData) {
+        self.id = option.id
+        super.init(frame: .zero)
         addSubviews()
         setupAppearance()
         makeConstraints()
+        configure(with: option)
     }
 
     required init?(coder: NSCoder) {
@@ -45,7 +47,7 @@ final class MealOptionView: UIControl {
     }
 
     /// Обновляет название, иконку и состояние выбора карточки.
-    func configure(with data: MealOptionData) {
+    private func configure(with data: MealOptionData) {
         titleLabel.text = data.title
         titleLabel.textColor = data.isSelected ? data.tintColor : .secondaryLabel
 
