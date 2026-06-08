@@ -44,7 +44,6 @@ final class MealOptionView: UIControl {
         fatalError("init(coder:) has not been implemented")
     }
 
-    /// Обновляет название, иконку и состояние выбора карточки.
     private func configure(with data: MealOptionData) {
         titleLabel.text = data.title
         titleLabel.textColor = data.isSelected ? data.tintColor : .secondaryLabel
