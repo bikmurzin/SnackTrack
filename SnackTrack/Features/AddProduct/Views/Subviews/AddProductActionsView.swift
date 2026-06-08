@@ -11,21 +11,33 @@ import SnapKit
 extension AddProductActionsView {
     private struct Appearance {
         static let buttonsSpacing = 12.0
+        
+        static let barcodeButtonData = AddProductActionData(
+            title: "Сканировать штрих-код",
+            iconSystemName: "barcode.viewfinder",
+            tintColor: .systemBlue
+        )
+        
+        static let createNewProductButtonData = AddProductActionData(
+            title: "Создать новый продукт",
+            iconSystemName: "plus.circle",
+            tintColor: .systemBlue
+        )
     }
 }
 
-/// View быстрых действий для добавления продукта.
+/// View действий для добавления продукта.
 final class AddProductActionsView: UIView {
     /// Вызывается при выборе сканирования штрих-кода.
     var onBarcodeTap: (() -> Void)?
 
-    /// Вызывается при выборе голосового ввода.
-    var onVoiceInputTap: (() -> Void)?
+    /// Вызывается при выборе создания нового продукта.
+    var createNewProductTap: (() -> Void)?
 
     private let stackView = UIStackView()
 
     private let barcodeButtonView = AddProductActionButtonView()
-    private let voiceInputButtonView = AddProductActionButtonView()
+    private let createNewProductButtonView = AddProductActionButtonView()
 
     init() {
         super.init(frame: .zero)
@@ -39,17 +51,11 @@ final class AddProductActionsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    /// Обновляет кнопки быстрых действий.
-    func configure(with data: AddProductActionsData) {
-        barcodeButtonView.configure(with: data.barcodeAction)
-        voiceInputButtonView.configure(with: data.voiceInputAction)
-    }
-
     private func addSubviews() {
         addSubview(stackView)
 
         stackView.addArrangedSubview(barcodeButtonView)
-        stackView.addArrangedSubview(voiceInputButtonView)
+        stackView.addArrangedSubview(createNewProductButtonView)
     }
 
     private func setupAppearance() {
@@ -59,6 +65,9 @@ final class AddProductActionsView: UIView {
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.spacing = Appearance.buttonsSpacing
+        
+        barcodeButtonView.configure(with: Appearance.barcodeButtonData)
+        createNewProductButtonView.configure(with: Appearance.createNewProductButtonData)
     }
 
     private func makeConstraints() {
@@ -74,9 +83,9 @@ final class AddProductActionsView: UIView {
             for: .touchUpInside
         )
 
-        voiceInputButtonView.addTarget(
+        createNewProductButtonView.addTarget(
             self,
-            action: #selector(voiceInputButtonTapped),
+            action: #selector(createNewProductButtonTapped),
             for: .touchUpInside
         )
     }
@@ -85,7 +94,7 @@ final class AddProductActionsView: UIView {
         onBarcodeTap?()
     }
 
-    @objc private func voiceInputButtonTapped() {
-        onVoiceInputTap?()
+    @objc private func createNewProductButtonTapped() {
+        createNewProductTap?()
     }
 }
