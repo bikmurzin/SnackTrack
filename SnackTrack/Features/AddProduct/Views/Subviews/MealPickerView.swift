@@ -41,8 +41,6 @@ final class MealPickerView: UIView {
     private let containerView = UIView()
     private let optionsStackView = UIStackView()
 
-    private var options: [MealOptionData] = []
-
     init() {
         super.init(frame: .zero)
 
@@ -57,20 +55,18 @@ final class MealPickerView: UIView {
 
     /// Перестраивает варианты приёмов пищи.
     func configure(with options: [MealOptionData]) {
-        self.options = options
-
         optionsStackView.arrangedSubviews.forEach {
             optionsStackView.removeArrangedSubview($0)
             $0.removeFromSuperview()
         }
 
         options.forEach { option in
-            let optionView = MealOptionView()
-            optionView.configure(with: option)
+            let optionView = MealOptionView(option: option)
 
-            optionView.addTarget(
-                self,
-                action: #selector(optionTapped(_:)),
+            optionView.addAction(
+                UIAction { [weak self] _ in
+                    self?.onMealTap?(option)
+                },
                 for: .touchUpInside
             )
 
@@ -138,14 +134,5 @@ final class MealPickerView: UIView {
             make.verticalEdges.equalToSuperview().inset(Appearance.containerVerticalOffset)
             make.horizontalEdges.equalToSuperview().inset(Appearance.containerHorizontalOffset)
         }
-    }
-
-    @objc private func optionTapped(_ sender: MealOptionView) {
-        guard let index = optionsStackView.arrangedSubviews.firstIndex(of: sender),
-              options.indices.contains(index) else {
-            return
-        }
-
-        onMealTap?(options[index])
     }
 }

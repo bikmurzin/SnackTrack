@@ -42,6 +42,7 @@ final class AddProductViewController: UIViewController {
         super.viewDidLoad()
         
         setupNavigationBar()
+        setupActions()
         addKeyboardDismissLogic()
         bindViewModel()
         viewModel.viewDidLoad()
@@ -78,7 +79,7 @@ final class AddProductViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: Images.confirm),
-            style: .prominent,
+            style: .plain,
             target: self,
             action: #selector(confirmButtonTapped)
         )
@@ -86,8 +87,16 @@ final class AddProductViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
     }
     
+    private func setupActions() {
+        addProductView.onMealTap = { [weak self] data in
+            self?.viewModel.selectMealCategory(with: data.id)
+        }
+    }
+    
     private func addKeyboardDismissLogic() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        tap.delegate = self
         view.addGestureRecognizer(tap)
     }
     
@@ -101,5 +110,21 @@ final class AddProductViewController: UIViewController {
     
     @objc private func confirmButtonTapped() {
         print("confirm tapped")
+    }
+}
+
+extension AddProductViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        var touchedView = touch.view
+        
+        while let view = touchedView {
+            if view is UIControl || view is UITextField || view is UIScrollView {
+                return false
+            }
+            
+            touchedView = view.superview
+        }
+        
+        return true
     }
 }

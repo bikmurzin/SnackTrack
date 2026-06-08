@@ -17,6 +17,8 @@ extension AddProductView {
 
 /// Корневая view экрана добавления продукта с выбором приёма пищи, поиском и недавними продуктами.
 final class AddProductView: UIView {
+    /// Вызывается при выборе варианта приёма пищи.
+    var onMealTap: ((MealOptionData) -> Void)?
     private let stackView = UIStackView()
 
     private let mealPickerView = MealPickerView()
@@ -61,6 +63,10 @@ final class AddProductView: UIView {
 
         productSearchView.onSearchButtonTap = { text in
             print("search button tapped:", text)
+        }
+        
+        mealPickerView.onMealTap = { [weak self] data in
+            self?.onMealTap?(data)
         }
     }
 
